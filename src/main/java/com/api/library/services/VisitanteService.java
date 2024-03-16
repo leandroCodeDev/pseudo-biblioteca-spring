@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public interface VisitanteService {
 
-    List<VisitanteModel> findAllVisitantes();
+    List<VisitanteRecord> findAllVisitantes();
 
-    Optional<VisitanteModel> findVisitante(Long id);
+    VisitanteRecord findVisitante(Long id);
 
 
     VisitanteRecord saveVisitante(VisitanteRecord Visitante);

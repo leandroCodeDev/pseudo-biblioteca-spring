@@ -24,10 +24,17 @@ public class VisitanteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<VisitanteModel>> getAllVisitantes() {
-        List<VisitanteModel> visitantes;
+    public ResponseEntity<List<VisitanteRecord>> getAllVisitantes() {
+        List<VisitanteRecord> visitantes;
         visitantes = visitanteService.findAllVisitantes();
         return new ResponseEntity<>(visitantes, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<VisitanteRecord> getVisitante(@PathVariable Long id) {
+        VisitanteRecord visitante;
+        visitante = visitanteService.findVisitante(id);
+        return new ResponseEntity<>(visitante, HttpStatus.OK);
     }
 
     @PostMapping
