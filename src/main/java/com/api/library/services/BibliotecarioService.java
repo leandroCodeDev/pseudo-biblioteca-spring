@@ -2,6 +2,7 @@ package com.api.library.services;
 
 
 import com.api.library.dtos.BibliotecarioRecord;
+import com.api.library.dtos.EmprestimoBibliotecarioRecord;
 import com.api.library.models.BibliotecarioModel;
 import com.api.library.models.EmprestimoModel;
 import com.api.library.models.LivroModel;
@@ -22,5 +23,5 @@ public interface BibliotecarioService {
     Optional<BibliotecarioModel> findBibliotecario(Long id);
     BibliotecarioRecord saveBibliotecario(BibliotecarioRecord Bibliotecario);
 
-    String realizarEmprestimo(Long idBibliotecario, Long idMembro, Long idLivro);
+    String realizarEmprestimo(Long idBibliotecario, EmprestimoBibliotecarioRecord emprestimoBibliotecarioRecord);
 }

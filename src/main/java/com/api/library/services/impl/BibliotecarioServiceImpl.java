@@ -2,6 +2,7 @@ package com.api.library.services.impl;
 
 
 import com.api.library.dtos.BibliotecarioRecord;
+import com.api.library.dtos.EmprestimoBibliotecarioRecord;
 import com.api.library.dtos.LivroRecord;
 import com.api.library.exception.ModelRepositoryNotFoundException;
 import com.api.library.models.BibliotecarioModel;
@@ -53,7 +54,9 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
         return bibliotecarioModel.toRecords();
     }
 
-    public String realizarEmprestimo(Long idBibliotecario, Long idMembro, Long idLivro) {
+    public String realizarEmprestimo( Long idBibliotecario, EmprestimoBibliotecarioRecord emprestimoBibliotecarioRecord) {
+        Long idLivro = emprestimoBibliotecarioRecord.idLivro();
+        Long idMembro = emprestimoBibliotecarioRecord.idMembro();
         // Lógica para realizar o empréstimo
         BibliotecarioModel bibliotecario = bibliotecarioRepository.findById(idBibliotecario)
                 .orElseThrow(() -> new ModelRepositoryNotFoundException("Bibliotecário não encontrado"));
@@ -61,21 +64,15 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
 
 
         // Verificar se o membro com o ID fornecido existe
-        Optional<MembroModel> membro = membroService.findMembro(idMembro);
-        if (membro.isEmpty()) {
-            throw new ModelRepositoryNotFoundException("Membro não encontrado");
-        }
+        MembroModel membro = membroService.findMembro(idMembro).orElseThrow(() -> new ModelRepositoryNotFoundException("Membro não encontrado"));
 
         // Verificar se o livro com o ID fornecido existe
-        Optional<LivroModel> livro = livroService.findLivro(idLivro);
-        if (livro.isEmpty()) {
-            throw new ModelRepositoryNotFoundException("Livro não encontrado");
-        }
+        LivroModel livro = livroService.findLivro(idLivro).orElseThrow(() -> new ModelRepositoryNotFoundException("Livro não encontrado"));
 
         // Realizar o empréstimo do livro para o membro
         EmprestimoModel emprestimo = new EmprestimoModel();
-        emprestimo.setMembro(membro.get());
-        emprestimo.setLivro(livro.get());
+        emprestimo.setMembro(membro);
+        emprestimo.setLivro(livro);
         emprestimoService.saveEmprestimo(emprestimo);
 
         return "Empréstimo realizado com sucesso";

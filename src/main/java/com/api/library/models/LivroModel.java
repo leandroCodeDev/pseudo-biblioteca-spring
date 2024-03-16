@@ -17,11 +17,22 @@ public class LivroModel implements Serializable {
     private String nome;
     @Column(columnDefinition = "varchar(255) not null")
     private String autor;
-    @Column(name = "ano_publicacao", columnDefinition = "varchar(255) not null")
+    @Column(name = "ano_publicacao", columnDefinition = "varchar(4) not null")
     private Integer anoPublicacao;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public LivroModel() {}
+
+    public LivroModel(long id) {
+        this.id = id;
+    }
 
     public LivroModel(long id, String nome, String autor, Integer anoPublicacao) {
         this.id = id;

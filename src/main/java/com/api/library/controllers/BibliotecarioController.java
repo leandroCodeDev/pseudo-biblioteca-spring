@@ -2,9 +2,8 @@ package com.api.library.controllers;
 
 
 import com.api.library.dtos.BibliotecarioRecord;
-import com.api.library.dtos.EmprestimoRequest;
+import com.api.library.dtos.EmprestimoBibliotecarioRecord;
 import com.api.library.models.BibliotecarioModel;
-import com.api.library.models.EmprestimoModel;
 import com.api.library.services.BibliotecarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,13 +41,13 @@ public class BibliotecarioController {
     @PostMapping("/{id}/emprestimo")
     public ResponseEntity<String> realizarEmprestimo(
             @PathVariable("id") Long idBibliotecario,
-            @RequestBody EmprestimoRequest emprestimoRequest) {
+            @RequestBody EmprestimoBibliotecarioRecord emprestimoBibliotecarioRecord) {
         // Aqui você pode validar se o bibliotecário existe e tem permissão para realizar o empréstimo
         // e também se o membro e o livro existem no sistema.
 
         // Por simplicidade, suponha que emprestimoService.realizarEmprestimo
         // é um método que realiza o empréstimo e retorna uma mensagem de sucesso.
-        String mensagem = bibliotecarioService.realizarEmprestimo(idBibliotecario, emprestimoRequest.getIdMembro(), emprestimoRequest.getIdLivro());
+        String mensagem = bibliotecarioService.realizarEmprestimo(idBibliotecario, emprestimoBibliotecarioRecord);
 
         return new ResponseEntity<>(mensagem, HttpStatus.OK);
 
