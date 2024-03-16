@@ -38,8 +38,6 @@ public class EmprestimoModel  implements Serializable {
         this.id = id;
     }
 
-
-
     public Date getDataEmprestimo() {
         return dataEmprestimo;
     }

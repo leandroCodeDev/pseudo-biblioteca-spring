@@ -23,10 +23,16 @@ public class EmprestimoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EmprestimoModel>> getAllEmprestimos() {
-        List<EmprestimoModel> emprestimos;
+    public ResponseEntity<List<EmprestimoRecord>> getAllEmprestimos() {
+        List<EmprestimoRecord> emprestimos;
         emprestimos = emprestimoService.findAllEmprestimos();
         return new ResponseEntity<>(emprestimos, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EmprestimoRecord> getEmprestimo(@PathVariable Long id) {
+        EmprestimoRecord emprestimo = emprestimoService.findEmprestimo(id);
+        return new ResponseEntity<>(emprestimo, HttpStatus.OK);
     }
 
     @PostMapping

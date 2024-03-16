@@ -1,7 +1,9 @@
 package com.api.library.services.impl;
 
+import com.api.library.dtos.BibliotecarioRecord;
 import com.api.library.dtos.EmprestimoRecord;
 import com.api.library.exception.ModelRepositoryNotFoundException;
+import com.api.library.models.BibliotecarioModel;
 import com.api.library.models.EmprestimoModel;
 import com.api.library.models.LivroModel;
 import com.api.library.models.MembroModel;
@@ -13,6 +15,7 @@ import com.api.library.services.MembroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,12 +34,19 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     }
 
     @Override
-    public List<EmprestimoModel> findAllEmprestimos() {
-        return emprestimoRepository.findAll();
+    public List<EmprestimoRecord> findAllEmprestimos() {
+        List<EmprestimoModel> emprestimoModels = emprestimoRepository.findAll();
+        List<EmprestimoRecord> emprestimoRecords = new ArrayList<>();
+        for (EmprestimoModel emprestimo : emprestimoModels){
+            emprestimoRecords.add(mapToBibliotecarioRecord(emprestimo));
+        }
+
+        return emprestimoRecords;
     }
 
-    public Optional<EmprestimoModel> findEmprestimo(Long id) {
-        return emprestimoRepository.findById(id);
+    public EmprestimoRecord findEmprestimo(Long id) {
+        EmprestimoModel Emprestimo = emprestimoRepository.findById(id) .orElseThrow(() -> new ModelRepositoryNotFoundException("Bibliotecário não encontrado"));
+        return Emprestimo.toRecords();
     }
 
     @Override
@@ -54,4 +64,11 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     public EmprestimoModel saveEmprestimo(EmprestimoModel emprestimo) {
         return emprestimoRepository.save(emprestimo);
     }
+
+    private EmprestimoRecord mapToBibliotecarioRecord(EmprestimoModel emprestimo) {
+        // Faça o mapeamento entre BibliotecarioModel e BibliotecarioRecord aqui
+        // Por exemplo:
+        return new EmprestimoRecord(emprestimo.getId(), emprestimo.getDataEmprestimo(),emprestimo.getDataDevolucao(),emprestimo.getLivro().getId(), emprestimo.getMembro().getId());
+    }
+
 }

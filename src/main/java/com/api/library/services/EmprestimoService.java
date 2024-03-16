@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface EmprestimoService {
 
-    List<EmprestimoModel> findAllEmprestimos();
-    Optional<EmprestimoModel> findEmprestimo(Long id);
+    List<EmprestimoRecord> findAllEmprestimos();
+    EmprestimoRecord findEmprestimo(Long id);
 
     EmprestimoRecord saveEmprestimo(EmprestimoRecord Emprestimo);
 
