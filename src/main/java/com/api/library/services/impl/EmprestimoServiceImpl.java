@@ -43,7 +43,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     public EmprestimoRecord saveEmprestimo(EmprestimoRecord emprestimo) {
 
         membroService.findMembro(emprestimo.idMembro()).orElseThrow(() -> new ModelRepositoryNotFoundException("Membro não encontrado"));
-        livroService.findLivro(emprestimo.idLivro()).orElseThrow(() -> new ModelRepositoryNotFoundException("Livro não encontrado"));
+        livroService.findLivro(emprestimo.idLivro());
 
 
         EmprestimoModel emprestimoModel = emprestimoRepository.save(new EmprestimoModel(emprestimo));

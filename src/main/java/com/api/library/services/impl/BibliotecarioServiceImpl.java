@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,13 +40,28 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
     }
 
     @Override
-    public List<BibliotecarioModel> findAllBibliotecarios() {
-        return bibliotecarioRepository.findAll();
+    public List<BibliotecarioRecord> findAllBibliotecarios() {
+        List<BibliotecarioModel> bibliotecarios = bibliotecarioRepository.findAll();
+        List<BibliotecarioRecord> bibliotecarioRecords = new ArrayList<>();
+
+        for (BibliotecarioModel bibliotecarioModel : bibliotecarios) {
+            bibliotecarioRecords.add(mapToBibliotecarioRecord(bibliotecarioModel));
+        }
+
+        return bibliotecarioRecords;
+
     }
 
     @Override
-    public Optional<BibliotecarioModel> findBibliotecario(Long id) {
-        return bibliotecarioRepository.findById(id);
+    public BibliotecarioRecord findBibliotecario(Long id) {
+        BibliotecarioModel bibliotecarioModel = findBibliotecarioModel(id);
+        return bibliotecarioModel.toRecords();
+    }
+
+    @Override
+    public BibliotecarioModel findBibliotecarioModel(Long id) {
+        return  bibliotecarioRepository.findById(id).orElseThrow(() -> new ModelRepositoryNotFoundException("Bibliotecário não encontrado"));
+
     }
 
     @Override
@@ -64,10 +80,10 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
 
 
         // Verificar se o membro com o ID fornecido existe
-        MembroModel membro = membroService.findMembro(idMembro).orElseThrow(() -> new ModelRepositoryNotFoundException("Membro não encontrado"));
+        MembroModel membro = membroService.findMembroModel(idMembro);
 
         // Verificar se o livro com o ID fornecido existe
-        LivroModel livro = livroService.findLivro(idLivro).orElseThrow(() -> new ModelRepositoryNotFoundException("Livro não encontrado"));
+        LivroModel livro = livroService.findLivroModel(idLivro);
 
         // Realizar o empréstimo do livro para o membro
         EmprestimoModel emprestimo = new EmprestimoModel();
@@ -76,5 +92,12 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
         emprestimoService.saveEmprestimo(emprestimo);
 
         return "Empréstimo realizado com sucesso";
+    }
+
+
+    private BibliotecarioRecord mapToBibliotecarioRecord(BibliotecarioModel bibliotecarioModel) {
+        // Faça o mapeamento entre BibliotecarioModel e BibliotecarioRecord aqui
+        // Por exemplo:
+        return new BibliotecarioRecord(bibliotecarioModel.getId(), bibliotecarioModel.getNome(),bibliotecarioModel.getEmail(),null);
     }
 }

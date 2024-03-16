@@ -24,15 +24,15 @@ public class LivroController {
     }
 
     @GetMapping
-    public ResponseEntity<List<LivroModel>> getAllLivros() {
-        List<LivroModel> livros;
+    public ResponseEntity<List<LivroRecord>> getAllLivros() {
+        List<LivroRecord> livros;
         livros = livroService.findAllLivros();
         return new ResponseEntity<>(livros, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<LivroModel>> getAllLivros( @PathVariable("id") Long id) {
-        Optional<LivroModel> livro;
+    public ResponseEntity<LivroRecord> getAllLivros( @PathVariable("id") Long id) {
+        LivroRecord livro;
         livro = livroService.findLivro(id);
         return new ResponseEntity<>(livro, HttpStatus.OK);
     }

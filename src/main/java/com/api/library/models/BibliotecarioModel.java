@@ -62,6 +62,6 @@ public class BibliotecarioModel implements Serializable {
     }
 
     public BibliotecarioRecord toRecords(){
-        return new BibliotecarioRecord(this.id, this.nome, this.email, this.senha);
+        return new BibliotecarioRecord(this.id, this.nome, this.email,null);
     }
 }

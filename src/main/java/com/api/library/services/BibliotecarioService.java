@@ -18,10 +18,9 @@ import java.util.Optional;
 
 
 public interface BibliotecarioService {
-    List<BibliotecarioModel> findAllBibliotecarios();
-
-    Optional<BibliotecarioModel> findBibliotecario(Long id);
+    List<BibliotecarioRecord> findAllBibliotecarios();
+    BibliotecarioRecord findBibliotecario(Long id);
+    BibliotecarioModel findBibliotecarioModel(Long id);
     BibliotecarioRecord saveBibliotecario(BibliotecarioRecord Bibliotecario);
-
     String realizarEmprestimo(Long idBibliotecario, EmprestimoBibliotecarioRecord emprestimoBibliotecarioRecord);
 }

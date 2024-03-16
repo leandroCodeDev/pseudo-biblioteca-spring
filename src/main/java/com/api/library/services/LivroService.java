@@ -16,9 +16,11 @@ import java.util.Optional;
 @Service
 public interface LivroService {
 
-    List<LivroModel> findAllLivros();
+    List<LivroRecord> findAllLivros();
 
-    Optional<LivroModel> findLivro(Long id);
+    LivroRecord findLivro(Long id);
+
+    LivroModel findLivroModel(Long id);
 
 
     LivroRecord saveLivro(LivroRecord livro);

@@ -23,9 +23,17 @@ public class BibliotecarioController {
         this.bibliotecarioService = bibliotecarioService;
     }
 
+
+    @GetMapping("/{id}")
+    public BibliotecarioRecord getBibliotecario( @PathVariable("id") Long id) {
+        BibliotecarioRecord bibliotecarios = bibliotecarioService.findBibliotecario(id);
+        return new ResponseEntity<>(bibliotecarios, HttpStatus.OK).getBody();
+    }
+
+
     @GetMapping
-    public ResponseEntity<List<BibliotecarioModel>> getAllBibliotecarios() {
-        List<BibliotecarioModel> bibliotecarios;
+    public ResponseEntity<List<BibliotecarioRecord>> getAllBibliotecarios() {
+        List<BibliotecarioRecord> bibliotecarios;
         bibliotecarios = bibliotecarioService.findAllBibliotecarios();
         return new ResponseEntity<>(bibliotecarios, HttpStatus.OK);
     }
