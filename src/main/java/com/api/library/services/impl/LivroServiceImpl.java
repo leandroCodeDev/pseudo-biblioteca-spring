@@ -37,7 +37,7 @@ public class LivroServiceImpl implements LivroService {
 
     @Override
     public LivroRecord findLivro(Long id) {
-        LivroModel livro = livroRepository.findById(id).orElseThrow(() -> new ModelRepositoryNotFoundException("Livro não encontrado"));
+        LivroModel livro = findLivroModel(id);
         return livro.toRecords();
     }
 

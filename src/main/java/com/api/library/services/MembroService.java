@@ -9,9 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MembroService {
-    List<MembroModel> findAllMembros();
+    List<MembroRecord> findAllMembros();
 
-    Optional<MembroModel> findMembro(Long id);
+    MembroRecord findMembro(Long id);
+    MembroModel findMembroModel(Long id);
 
 
     MembroRecord saveMembro(MembroRecord Membro);

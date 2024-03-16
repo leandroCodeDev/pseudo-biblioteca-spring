@@ -23,9 +23,16 @@ public class MembroController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MembroModel>> getAllMembros() {
-        List<MembroModel> membros;
+    public ResponseEntity<List<MembroRecord>> getAllMembros() {
+        List<MembroRecord> membros;
         membros = membroService.findAllMembros();
+        return new ResponseEntity<>(membros, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MembroRecord> getAllMembros(@PathVariable Long id) {
+        MembroRecord membros;
+        membros = membroService.findMembro(id);
         return new ResponseEntity<>(membros, HttpStatus.OK);
     }
 

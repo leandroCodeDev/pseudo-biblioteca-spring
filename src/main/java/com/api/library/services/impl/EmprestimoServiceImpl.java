@@ -42,7 +42,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     @Override
     public EmprestimoRecord saveEmprestimo(EmprestimoRecord emprestimo) {
 
-        membroService.findMembro(emprestimo.idMembro()).orElseThrow(() -> new ModelRepositoryNotFoundException("Membro não encontrado"));
+        membroService.findMembro(emprestimo.idMembro());
         livroService.findLivro(emprestimo.idLivro());
 
 
