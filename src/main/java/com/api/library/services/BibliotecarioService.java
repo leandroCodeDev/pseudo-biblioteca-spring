@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
-
+@Service
 public interface BibliotecarioService {
     List<BibliotecarioRecord> findAllBibliotecarios();
     BibliotecarioRecord findBibliotecario(Long id);
@@ -29,4 +29,6 @@ public interface BibliotecarioService {
     void setMembroService(MembroService membroService);
     void setLivroService(LivroService livroService);
     void setEmprestimoService(EmprestimoService emprestimoService);
+
+    void updateBibliotecario(Long id, String nome, String senha);
 }

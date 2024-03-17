@@ -21,4 +21,6 @@ public interface MembroService {
     Boolean deleteMembro(Long id);
 
     void setEmprestimoService(EmprestimoService emprestimoService);
+
+    void updateMembro(Long id, String telefone);
 }

@@ -22,4 +22,6 @@ public interface EmprestimoService {
     void setLivroService(LivroService livroService);
 
     Boolean deleteEmprestimo(Long id);
+
+    void devolucaoEmprestimo(Long id, Boolean devolucao);
 }

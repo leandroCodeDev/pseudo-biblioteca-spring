@@ -18,7 +18,6 @@ public class VisitanteServiceImpl implements VisitanteService {
 
     private final VisitanteRepository visitanteRepository;
 
-    @Autowired
     public VisitanteServiceImpl(VisitanteRepository visitanteRepository) {
         this.visitanteRepository = visitanteRepository;
     }
@@ -53,6 +52,11 @@ public class VisitanteServiceImpl implements VisitanteService {
     public Boolean deleteVisitante(Long id){
         visitanteRepository.deleteById(id);
         return !visitanteRepository.existsById(id);
+    }
+
+
+    public void updateVisitante(Long id, String nome){
+        visitanteRepository.updateNomeById(id,nome);
     }
 
     private VisitanteRecord mapVisitanteToRecord(VisitanteModel visitanteModel) {

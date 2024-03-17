@@ -102,6 +102,16 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
         return !bibliotecarioRepository.existsById(id);
     }
 
+    public void updateBibliotecario(Long id, String nome, String senha) {
+        if (nome != null && !nome.isBlank()) {
+            bibliotecarioRepository.updateNomeById(id, nome);
+        }
+
+        if (senha != null && !senha.isBlank()) {
+            bibliotecarioRepository.updateSenhaById(id, senha);
+        }
+    }
+
 
     private BibliotecarioRecord mapToBibliotecarioRecord(BibliotecarioModel bibliotecarioModel) {
         // Faça o mapeamento entre BibliotecarioModel e BibliotecarioRecord aqui

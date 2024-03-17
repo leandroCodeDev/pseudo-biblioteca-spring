@@ -42,6 +42,15 @@ public class VisitanteController {
         return new ResponseEntity<>(visitanteService.deleteVisitante(id), HttpStatus.OK);
     }
 
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateVisitante(@PathVariable Long id,
+                                                @RequestParam(name = "nome", required = false) String nome
+    ) {
+        visitanteService.updateVisitante(id,nome);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping
     public ResponseEntity<VisitanteRecord> saveVisitante(@RequestBody VisitanteRecord visitante) {
         VisitanteRecord savedVisitante;

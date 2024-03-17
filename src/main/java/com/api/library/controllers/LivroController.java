@@ -43,6 +43,15 @@ public class LivroController {
         return new ResponseEntity<>(livroService.deleteLivro(id), HttpStatus.OK);
     }
 
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateLivro( @PathVariable("id") Long id,
+                                             @RequestParam(name = "nome", required = false) String nome
+                                             ) {
+        livroService.updateLivro(id,nome);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping
     public ResponseEntity<LivroRecord> saveLivro(@RequestBody LivroRecord livro) {
         LivroRecord savedLivro = livroService.saveLivro(livro);

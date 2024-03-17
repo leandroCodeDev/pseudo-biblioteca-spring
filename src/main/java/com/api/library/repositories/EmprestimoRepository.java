@@ -19,12 +19,12 @@ public interface EmprestimoRepository  extends JpaRepository<EmprestimoModel, Lo
     @Transactional
     @Modifying
     @Query(value ="UPDATE Emprestimo SET data_emprestimo = :dataEmprestimo WHERE id = :id", nativeQuery = true)
-    EmprestimoModel updateDataEmprestimoById(Long id, Date dataEmprestimo);
+    void updateDataEmprestimoById(Long id, Date dataEmprestimo);
 
 
     @Transactional
     @Modifying
     @Query(value = "UPDATE Emprestimo SET data_devolucao = :dataDevolucao WHERE id = :id", nativeQuery = true)
-    EmprestimoModel updateDataDevolucaoById(Long id, Date dataDevolucao);
+    void updateDataDevolucaoById(Long id, Date dataDevolucao);
 
 }

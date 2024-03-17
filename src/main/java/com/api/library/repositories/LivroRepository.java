@@ -13,7 +13,7 @@ public interface LivroRepository extends JpaRepository<LivroModel, Long> {
     @Transactional
     @Modifying
     @Query(value = "UPDATE Livro SET nome = :nome WHERE id = :id", nativeQuery = true)
-    LivroModel updateNomeById(Long id, String nome);
+    void updateNomeById(Long id, String nome);
 
 
 }

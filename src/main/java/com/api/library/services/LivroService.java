@@ -28,4 +28,6 @@ public interface LivroService {
     Boolean deleteLivro(Long id);
 
     void setEmprestimoService(EmprestimoService emprestimoService);
+
+    void updateLivro(Long id, String nome);
 }

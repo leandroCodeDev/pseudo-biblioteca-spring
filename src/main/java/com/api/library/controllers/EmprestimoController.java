@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,6 @@ public class EmprestimoController {
 
     private final EmprestimoService emprestimoService;
 
-    @Autowired
     public EmprestimoController(LibraryServiceFacade libraryServiceFacade) {
         this.emprestimoService = libraryServiceFacade.emprestimoService();
         this.emprestimoService.setLivroService(libraryServiceFacade.livroService());
@@ -40,6 +40,13 @@ public class EmprestimoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteEmprestimo(@PathVariable Long id) {
         return new ResponseEntity<>(emprestimoService.deleteEmprestimo(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EmprestimoRecord> devolucaoEmprestimo(@PathVariable Long id,
+                                                                @RequestParam(name = "devolucao", required = false) Boolean devolucao) {
+        emprestimoService.devolucaoEmprestimo(id,devolucao);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping

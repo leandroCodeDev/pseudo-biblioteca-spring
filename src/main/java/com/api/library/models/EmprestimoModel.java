@@ -19,6 +19,7 @@ public class EmprestimoModel  implements Serializable {
     @Column(name = "data_emprestimo", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date dataEmprestimo;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_devolucao", columnDefinition = "TIMESTAMP")
     private Date dataDevolucao;
 

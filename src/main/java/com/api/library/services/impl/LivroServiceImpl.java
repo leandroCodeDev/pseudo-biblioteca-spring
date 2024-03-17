@@ -23,7 +23,6 @@ public class LivroServiceImpl implements LivroService {
     private final LivroRepository livroRepository;
     private EmprestimoService emprestimoService;
 
-    @Autowired
     public LivroServiceImpl(LivroRepository livroRepository) {
         this.livroRepository = livroRepository;
     }
@@ -67,6 +66,9 @@ public class LivroServiceImpl implements LivroService {
         return !livroRepository.existsById(id);
     }
 
+    public void updateLivro(Long id, String nome){
+        livroRepository.updateNomeById(id,nome);
+    }
     private LivroRecord mapToLivroRecord(LivroModel livroModel) {
 
         return new LivroRecord(livroModel.getId(), livroModel.getNome(),livroModel.getAutor(),livroModel.getAnoPublicacao());

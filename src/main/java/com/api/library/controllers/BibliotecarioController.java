@@ -54,6 +54,14 @@ public class BibliotecarioController {
     }
 
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateBibliotecarioNome(@PathVariable Long id,
+                                                           @RequestParam(name = "nome", required = false) String nome,
+                                                           @RequestParam(name = "senha", required = false) String senha
+    ) {
+        bibliotecarioService.updateBibliotecario(id,nome,senha);
+        return ResponseEntity.noContent().build();
+    }
 
     @PostMapping("/{id}/emprestimo")
     public ResponseEntity<String> realizarEmprestimo(

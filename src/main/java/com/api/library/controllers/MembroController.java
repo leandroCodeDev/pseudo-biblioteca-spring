@@ -1,6 +1,7 @@
 package com.api.library.controllers;
 
 
+import com.api.library.dtos.EmprestimoRecord;
 import com.api.library.dtos.MembroRecord;
 import com.api.library.models.MembroModel;
 import com.api.library.services.LibraryServiceFacade;
@@ -41,6 +42,14 @@ public class MembroController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteMembros(@PathVariable Long id) {
         return new ResponseEntity<>(membroService.deleteMembro(id), HttpStatus.OK);
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EmprestimoRecord> updateMembro(@PathVariable Long id,
+                                                         @RequestParam(name = "telefone", required = false) String telefone) {
+        membroService.updateMembro(id, telefone);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping

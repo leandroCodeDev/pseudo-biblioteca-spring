@@ -26,7 +26,7 @@ public class MembroServiceImpl implements MembroService {
     private final MembroRepository membroRepository;
     private EmprestimoService emprestimoService;
 
-    @Autowired
+
     public MembroServiceImpl(MembroRepository membroRepository) {
         this.membroRepository = membroRepository;
     }
@@ -55,7 +55,8 @@ public class MembroServiceImpl implements MembroService {
     }
 
     public MembroModel findMembroModel(Long id) {
-        return membroRepository.findById(id).orElseThrow(() -> new ModelRepositoryNotFoundException("Membro não encontrado"));
+        return membroRepository.findById(id)
+                .orElseThrow(() -> new ModelRepositoryNotFoundException("Membro não encontrado"));
     }
 
 
@@ -64,6 +65,12 @@ public class MembroServiceImpl implements MembroService {
         MembroModel membroModel = membroRepository.save(new MembroModel(membro));
         return membroModel.toRecords();
     }
+
+    @Override
+    public void updateMembro(Long id, String telefone){
+        membroRepository.updateTelefoneById(id,telefone);
+    }
+
 
     @Override
     public Boolean deleteMembro(Long id){

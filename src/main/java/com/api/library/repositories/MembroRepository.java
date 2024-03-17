@@ -14,7 +14,7 @@ public interface MembroRepository extends JpaRepository<MembroModel, Long> {
     @Transactional
     @Modifying
     @Query(value = "UPDATE membro SET telefone = :telefone WHERE id = :id", nativeQuery = true)
-    MembroModel updateTelefoneById(Long id, String telefone);
+    void updateTelefoneById(Long id, String telefone);
 
 
 }

@@ -13,11 +13,11 @@ public interface BibliotecarioRepository extends JpaRepository<BibliotecarioMode
     @Transactional
     @Modifying
     @Query( value = "UPDATE Bibliotecario  SET senha = :senha WHERE id = :id", nativeQuery = true)
-    BibliotecarioModel updateSenhaById(Long id, String senha);
+    void updateSenhaById(Long id, String senha);
 
     @Transactional
     @Modifying
     @Query(value = "UPDATE Bibliotecario SET nome = :nome WHERE id = :id", nativeQuery = true)
-    BibliotecarioModel updateNomeById(Long id, String nome);
+    void updateNomeById(Long id, String nome);
 
 }

@@ -14,6 +14,11 @@ public interface VisitanteRepository  extends JpaRepository<VisitanteModel, Long
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE membro SET telefone = :telefone and nome = :nome WHERE id = :id", nativeQuery = true)
-    VisitanteModel updateDadosById(Long id, String nome,String telefone);
+    @Query(value = "UPDATE visitante SET telefone = :telefone and nome = :nome WHERE id = :id", nativeQuery = true)
+    void updateDadosById(Long id, String nome,String telefone);
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE visitante SET nome = :nome WHERE id = :id", nativeQuery = true)
+    void updateNomeById(Long id, String nome);
 }

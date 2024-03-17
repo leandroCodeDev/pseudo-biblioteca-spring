@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,6 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     private MembroService membroService;
     private LivroService livroService;
 
-    @Autowired
     public EmprestimoServiceImpl(EmprestimoRepository emprestimoRepository) {
         this.emprestimoRepository = emprestimoRepository;
     }
@@ -61,9 +61,15 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 
         MembroModel membro = membroService.findMembroModel(emprestimo.idMembro());
         LivroModel livro = livroService.findLivroModel(emprestimo.idLivro());
-
         EmprestimoModel emprestimoModel = emprestimoRepository.save(new EmprestimoModel(emprestimo,livro, membro));
         return emprestimoModel.toRecords();
+    }
+
+    @Override
+    public void devolucaoEmprestimo(Long id, Boolean devolucao) {
+        if(devolucao){
+            emprestimoRepository.updateDataDevolucaoById(id,new Date());
+        }
     }
 
     @Override
