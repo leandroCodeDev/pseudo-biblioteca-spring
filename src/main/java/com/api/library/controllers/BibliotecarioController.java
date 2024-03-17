@@ -3,7 +3,6 @@ package com.api.library.controllers;
 
 import com.api.library.dtos.BibliotecarioRecord;
 import com.api.library.dtos.EmprestimoBibliotecarioRecord;
-import com.api.library.models.BibliotecarioModel;
 import com.api.library.services.BibliotecarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,6 +43,12 @@ public class BibliotecarioController {
         savedBibliotecario = bibliotecarioService.saveBibliotecario(bibliotecario);
         return new ResponseEntity<>(savedBibliotecario, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteBibliotecario(@PathVariable Long id) {
+        return new ResponseEntity<>(bibliotecarioService.deleteBibliotecario(id), HttpStatus.CREATED);
+    }
+
 
 
     @PostMapping("/{id}/emprestimo")

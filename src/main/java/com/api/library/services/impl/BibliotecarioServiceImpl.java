@@ -94,6 +94,11 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
         return "Empréstimo realizado com sucesso";
     }
 
+    public Boolean deleteBibliotecario(Long id){
+        bibliotecarioRepository.deleteById(id);
+        return !bibliotecarioRepository.existsById(id);
+    }
+
 
     private BibliotecarioRecord mapToBibliotecarioRecord(BibliotecarioModel bibliotecarioModel) {
         // Faça o mapeamento entre BibliotecarioModel e BibliotecarioRecord aqui

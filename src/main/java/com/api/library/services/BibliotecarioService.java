@@ -23,4 +23,6 @@ public interface BibliotecarioService {
     BibliotecarioModel findBibliotecarioModel(Long id);
     BibliotecarioRecord saveBibliotecario(BibliotecarioRecord Bibliotecario);
     String realizarEmprestimo(Long idBibliotecario, EmprestimoBibliotecarioRecord emprestimoBibliotecarioRecord);
+
+    Boolean deleteBibliotecario(Long id);
 }
