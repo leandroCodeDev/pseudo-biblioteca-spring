@@ -37,7 +37,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     public List<EmprestimoRecord> findAllEmprestimos() {
         List<EmprestimoModel> emprestimoModels = emprestimoRepository.findAll();
         List<EmprestimoRecord> emprestimoRecords = new ArrayList<>();
-        for (EmprestimoModel emprestimo : emprestimoModels){
+        for (EmprestimoModel emprestimo : emprestimoModels) {
             emprestimoRecords.add(mapToBibliotecarioRecord(emprestimo));
         }
 
@@ -45,18 +45,17 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     }
 
     public EmprestimoRecord findEmprestimo(Long id) {
-        EmprestimoModel Emprestimo = emprestimoRepository.findById(id) .orElseThrow(() -> new ModelRepositoryNotFoundException("Bibliotecário não encontrado"));
+        EmprestimoModel Emprestimo = emprestimoRepository.findById(id).orElseThrow(() -> new ModelRepositoryNotFoundException("Bibliotecário não encontrado"));
         return Emprestimo.toRecords();
     }
 
     @Override
     public EmprestimoRecord saveEmprestimo(EmprestimoRecord emprestimo) {
 
-        membroService.findMembro(emprestimo.idMembro());
-        livroService.findLivro(emprestimo.idLivro());
+        MembroModel membro = membroService.findMembroModel(emprestimo.idMembro());
+        LivroModel livro = livroService.findLivroModel(emprestimo.idLivro());
 
-
-        EmprestimoModel emprestimoModel = emprestimoRepository.save(new EmprestimoModel(emprestimo));
+        EmprestimoModel emprestimoModel = emprestimoRepository.save(new EmprestimoModel(emprestimo,livro, membro));
         return emprestimoModel.toRecords();
     }
 
@@ -68,7 +67,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     private EmprestimoRecord mapToBibliotecarioRecord(EmprestimoModel emprestimo) {
         // Faça o mapeamento entre BibliotecarioModel e BibliotecarioRecord aqui
         // Por exemplo:
-        return new EmprestimoRecord(emprestimo.getId(), emprestimo.getDataEmprestimo(),emprestimo.getDataDevolucao(),emprestimo.getLivro().getId(), emprestimo.getMembro().getId());
+        return new EmprestimoRecord(emprestimo.getId(), emprestimo.getDataEmprestimo(), emprestimo.getDataDevolucao(), emprestimo.getLivro().getId(), emprestimo.getMembro().getId());
     }
 
 }

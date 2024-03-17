@@ -92,6 +92,14 @@ public class EmprestimoModel  implements Serializable {
         this.membro = new MembroModel(emprestimo.idMembro());
     }
 
+    public EmprestimoModel(EmprestimoRecord emprestimo, LivroModel livro, MembroModel membro) {
+        this.id = (emprestimo.id() != null) ? emprestimo.id() : 0;
+        this.dataEmprestimo = emprestimo.dataEmprestimo();
+        this.dataDevolucao = emprestimo.dataDevolucao();
+        this.livro = livro;
+        this.membro = membro;
+    }
+
 
     public EmprestimoRecord toRecords(){
         return new EmprestimoRecord(this.id,this.dataEmprestimo,this.dataDevolucao,this.livro.getId(),this.membro.getId());
