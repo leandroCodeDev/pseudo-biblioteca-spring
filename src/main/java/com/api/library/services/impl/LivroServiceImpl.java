@@ -5,8 +5,10 @@ import com.api.library.dtos.BibliotecarioRecord;
 import com.api.library.dtos.LivroRecord;
 import com.api.library.exception.ModelRepositoryNotFoundException;
 import com.api.library.models.BibliotecarioModel;
+import com.api.library.models.EmprestimoModel;
 import com.api.library.models.LivroModel;
 import com.api.library.repositories.LivroRepository;
+import com.api.library.services.EmprestimoService;
 import com.api.library.services.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +21,15 @@ import java.util.Optional;
 public class LivroServiceImpl implements LivroService {
 
     private final LivroRepository livroRepository;
+    private EmprestimoService emprestimoService;
 
     @Autowired
     public LivroServiceImpl(LivroRepository livroRepository) {
         this.livroRepository = livroRepository;
+    }
+
+    public void setEmprestimoService(EmprestimoService emprestimoService) {
+        this.emprestimoService = emprestimoService;
     }
 
     public List<LivroRecord> findAllLivros() {
@@ -46,9 +53,18 @@ public class LivroServiceImpl implements LivroService {
         return livroRepository.findById(id).orElseThrow(() -> new ModelRepositoryNotFoundException("Livro não encontrado"));
     }
 
+    @Override
     public LivroRecord saveLivro(LivroRecord livro) {
         LivroModel livroModel = livroRepository.save(new LivroModel(livro));
         return livroModel.toRecords();
+    }
+
+    @Override
+    public Boolean deleteLivro(Long id) {
+        List<EmprestimoModel> emprestimos = emprestimoService.findEmprestimosByLivroId(id);
+        emprestimoService.deleteAllEmprestimo(emprestimos);
+        livroRepository.deleteById(id);
+        return !livroRepository.existsById(id);
     }
 
     private LivroRecord mapToLivroRecord(LivroModel livroModel) {

@@ -3,6 +3,7 @@ package com.api.library.controllers;
 
 import com.api.library.dtos.LivroRecord;
 import com.api.library.models.LivroModel;
+import com.api.library.services.LibraryServiceFacade;
 import com.api.library.services.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,9 @@ public class LivroController {
     private final LivroService livroService;
 
     @Autowired
-    public LivroController(LivroService livroService) {
-        this.livroService = livroService;
+    public LivroController(LibraryServiceFacade libraryServiceFacade) {
+        this.livroService = libraryServiceFacade.livroService();
+        this.livroService.setEmprestimoService(libraryServiceFacade.emprestimoService());
     }
 
     @GetMapping
@@ -31,10 +33,14 @@ public class LivroController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LivroRecord> getAllLivros( @PathVariable("id") Long id) {
+    public ResponseEntity<LivroRecord> getLivro( @PathVariable("id") Long id) {
         LivroRecord livro;
         livro = livroService.findLivro(id);
         return new ResponseEntity<>(livro, HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteLivro( @PathVariable("id") Long id) {
+        return new ResponseEntity<>(livroService.deleteLivro(id), HttpStatus.OK);
     }
 
     @PostMapping

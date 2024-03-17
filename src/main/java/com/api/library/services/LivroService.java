@@ -24,4 +24,8 @@ public interface LivroService {
 
 
     LivroRecord saveLivro(LivroRecord livro);
+
+    Boolean deleteLivro(Long id);
+
+    void setEmprestimoService(EmprestimoService emprestimoService);
 }
