@@ -81,6 +81,13 @@ public class EmprestimoServiceImpl implements EmprestimoService {
         return emprestimoRepository.findByMembroId(idMembro);
     }
 
+
+    @Override
+    public Boolean deleteEmprestimo(Long id) {
+        emprestimoRepository.deleteById(id);
+        return !emprestimoRepository.existsById(id);
+    }
+
     @Override
     public void deleteAllEmprestimo(List<EmprestimoModel> emprestimos) {
         emprestimoRepository.deleteAll(emprestimos);

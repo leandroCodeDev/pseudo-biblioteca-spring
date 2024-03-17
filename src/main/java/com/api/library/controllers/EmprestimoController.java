@@ -37,6 +37,11 @@ public class EmprestimoController {
         return new ResponseEntity<>(emprestimo, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteEmprestimo(@PathVariable Long id) {
+        return new ResponseEntity<>(emprestimoService.deleteEmprestimo(id), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<EmprestimoRecord> saveEmprestimo(@RequestBody EmprestimoRecord emprestimo) {
         EmprestimoRecord savedEmprestimo;
