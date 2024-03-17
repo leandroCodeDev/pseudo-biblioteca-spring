@@ -1,31 +1,33 @@
 
-# Sistema de gerenciamento de biblioteca.
+# Sistema de Gerenciamento de Biblioteca
 
-## PROJETO
+## Introdução
 
-Este é um sistema de gerenciamento de uma Biblioteca. Foi criado como um exercício do curso [Floripa Mais Tec](https://floripamaistec.pmf.sc.gov.br), durante o módulo de Spring, lecionado por [André Santana Nunes](https://github.com/andresnunes).
+Este é um sistema de gerenciamento de uma Biblioteca, desenvolvido como parte do
+curso [Floripa Mais Tec](https://floripamaistec.pmf.sc.gov.br), durante o módulo de Spring, ministrado
+por [André Santana Nunes](https://github.com/andresnunes). O sistema visa facilitar o controle de livros, membros,
+empréstimos e bibliotecários.
 
-## TECH
+## Tecnologias Utilizadas
 
 - [Java](https://www.java.com/pt-BR/download/help/whatis_java.html)
 - [Spring](https://spring.io/)
-- [Postgres](https://www.postgresql.org/)
+- [PostgreSQL](https://www.postgresql.org/)
 - [Docker](https://www.docker.com/)
 
-## FERRAMENTAS
+## Ferramentas Utilizadas
 
 - [IntelliJ IDEA](https://www.jetbrains.com/pt-br/idea/)
 - [Insomnia](https://insomnia.rest/)
 - [Trello](https://trello.com/pt-BR)
 
-## Pré-requisitos
+## Pré-Requisitos
 
 - JDK 21 ou superior instalado
 - Git instalado na sua máquina
 - IntelliJ IDEA
 - Docker
-- Docker compose
-
+- Docker Compose
 
 ## Dependências
 
@@ -54,8 +56,7 @@ Este é um sistema de gerenciamento de uma Biblioteca. Foi criado como um exerc�
     - ArtifactId: `springdoc-openapi-starter-webmvc-ui`
     - Version: `2.4.0`
 
-
-## Getting Started
+## Como Começar
 
 ### Instalação
 
@@ -65,21 +66,22 @@ Este é um sistema de gerenciamento de uma Biblioteca. Foi criado como um exerc�
 git clone https://github.com/leandroCodeDev/pseudo-biblioteca-spring.git
 ```
 
-### Startar o branco de dados
+**Inicializando o Banco de Dados**
 
 ```bash
-Docker compose up -d
+docker-compose up -d
 ```
-### Executando
 
-Abra a pasta "controle-universidade-spring" no IntelliJ IDEA e inicie o projeto utilizando o atalho RUN da IDE.
+**Execução**
 
+Abra o projeto no IntelliJ IDEA e execute-o usando o atalho de execução da IDE.
 
-## Documentação de API
+## Documentação da API
 
-### Servidores
+### Servidor
+
 - **URL**: [http://localhost:8090](http://localhost:8090)
-- **Descrição**: URL do servidor gerado
+- **Descrição**: URL do servidor gerado.
 
 ### Endpoints
 
@@ -118,6 +120,11 @@ Abra a pasta "controle-universidade-spring" no IntelliJ IDEA e inicie o projeto 
         - `nome` (query, string, optional): Novo nome do visitante.
     - **Respostas**:
         - **200 OK**: Visitante atualizado com sucesso.
+          - Tipo de conteúdo: text/plain
+          - Exemplo de resposta:
+            ```
+             Visitante atualizado com sucesso.
+            ```
 
 - **DELETE /visitante/{id}**
     - **Descrição**: Exclui um visitante pelo ID.
@@ -125,6 +132,11 @@ Abra a pasta "controle-universidade-spring" no IntelliJ IDEA e inicie o projeto 
         - `id` (path, integer, int64, required): ID do visitante.
     - **Respostas**:
         - **200 OK**: Visitante excluído com sucesso.
+            - Tipo de conteúdo: text/plain
+            - Exemplo de resposta:
+              ```
+               Visitante excluído com sucesso.
+              ```
 
 #### 2. Gerenciamento de Membros
 
@@ -162,8 +174,13 @@ Abra a pasta "controle-universidade-spring" no IntelliJ IDEA e inicie o projeto 
     - **Parâmetros**:
         - `id` (path, integer, int64, required): ID do membro.
         - `telefone` (query, string, optional): Novo telefone do membro.
-    - **Respostas**:
+      - **Respostas**:
         - **200 OK**: Membro atualizado com sucesso.
+          - Tipo de conteúdo: text/plain
+          - Exemplo de resposta:
+            ```
+             Membro atualizado com sucesso.
+            ```
 
 - **DELETE /membro/{id}**
     - **Descrição**: Exclui um membro pelo ID.
@@ -171,6 +188,11 @@ Abra a pasta "controle-universidade-spring" no IntelliJ IDEA e inicie o projeto 
         - `id` (path, integer, int64, required): ID do membro.
     - **Respostas**:
         - **200 OK**: Membro excluído com sucesso.
+          - Tipo de conteúdo: text/plain
+          - Exemplo de resposta:
+            ```
+             Membro excluído com sucesso.
+            ```
 
 #### 3. Gerenciamento de Livros
 
@@ -208,11 +230,15 @@ Abra a pasta "controle-universidade-spring" no IntelliJ IDEA e inicie o projeto 
     - **Descrição**: Atualiza um livro pelo ID.
     - **Parâmetros**:
         - `id` (path, integer, int64, required): ID do livro.
-        - `nome` (query, string, optional): Novo
+        - `nome` (query, string, optional): Novo nome do livro.
 
-nome do livro.
 - **Respostas**:
     - **200 OK**: Livro atualizado com sucesso.
+        - Tipo de conteúdo: text/plain
+        - Exemplo de resposta:
+          ```
+           Livro atualizado com sucesso.
+          ```
 
 - **DELETE /livro/{id}**
     - **Descrição**: Exclui um livro pelo ID.
@@ -220,6 +246,11 @@ nome do livro.
         - `id` (path, integer, int64, required): ID do livro.
     - **Respostas**:
         - **200 OK**: Livro excluído com sucesso.
+          - Tipo de conteúdo: text/plain
+          - Exemplo de resposta:
+            ```
+             Livro excluído com sucesso.
+            ```
 
 #### 4. Gerenciamento de Empréstimos
 
@@ -266,6 +297,11 @@ nome do livro.
         - `devolucao` (query, boolean, optional): Indica se o livro foi devolvido.
     - **Respostas**:
         - **200 OK**: Empréstimo atualizado com sucesso.
+          - Tipo de conteúdo: text/plain
+          - Exemplo de resposta:
+            ```
+            Empréstimo atualizado com sucesso.
+            ```
 
 - **DELETE /emprestimo/{id}**
     - **Descrição**: Exclui um empréstimo pelo ID.
@@ -273,6 +309,11 @@ nome do livro.
         - `id` (path, integer, int64, required): ID do empréstimo.
     - **Respostas**:
         - **200 OK**: Empréstimo excluído com sucesso.
+            - Tipo de conteúdo: text/plain
+            - Exemplo de resposta:
+              ```
+              Empréstimo excluído com sucesso.
+              ```
 
 #### 5. Gerenciamento de Bibliotecários
 
@@ -313,6 +354,11 @@ nome do livro.
         - `senha` (query, string, optional): Nova senha do bibliotecário.
     - **Respostas**:
         - **200 OK**: Bibliotecário atualizado com sucesso.
+            - Tipo de conteúdo: text/plain
+            - Exemplo de resposta:
+              ```
+              Bibliotecário atualizado com sucesso.
+              ```
 
 - **DELETE /bibliotecario/{id}**
     - **Descrição**: Exclui um bibliotecário pelo ID.
@@ -320,6 +366,11 @@ nome do livro.
         - `id` (path, integer, int64, required): ID do bibliotecário.
     - **Respostas**:
         - **200 OK**: Bibliotecário excluído com sucesso.
+          - Tipo de conteúdo: text/plain
+          - Exemplo de resposta:
+            ```
+            Bibliotecário excluído com sucesso.
+            ```
 
 #### 6. Realizar Empréstimo por Bibliotecário
 
@@ -354,10 +405,11 @@ nome do livro.
             "required": ["livroId", "membroId", "dataInicio", "dataFim"]
           }
           ```
-  - **Respostas**:
-      - **200 OK**: Empréstimo realizado com sucesso.
-          - Tipo de conteúdo: text/plain
-          - Exemplo de resposta:
-            ```
-            Empréstimo realizado com sucesso.
-            ```
+
+    - **Respostas**:
+        - **200 OK**: Empréstimo realizado com sucesso.
+            - Tipo de conteúdo: text/plain
+            - Exemplo de resposta:
+              ```
+              Empréstimo realizado com sucesso.
+              ```
