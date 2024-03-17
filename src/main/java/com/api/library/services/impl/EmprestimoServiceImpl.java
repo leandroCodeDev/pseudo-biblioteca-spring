@@ -10,6 +10,7 @@ import com.api.library.models.MembroModel;
 import com.api.library.repositories.EmprestimoRepository;
 import com.api.library.repositories.MembroRepository;
 import com.api.library.services.EmprestimoService;
+import com.api.library.services.LibraryServiceFacade;
 import com.api.library.services.LivroService;
 import com.api.library.services.MembroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,19 @@ import java.util.Optional;
 public class EmprestimoServiceImpl implements EmprestimoService {
 
     private final EmprestimoRepository emprestimoRepository;
-    private final MembroService membroService;
-    private final LivroService livroService;
+    private MembroService membroService;
+    private LivroService livroService;
 
     @Autowired
-    public EmprestimoServiceImpl(EmprestimoRepository emprestimoRepository, MembroService membroService, LivroService livroService) {
+    public EmprestimoServiceImpl(EmprestimoRepository emprestimoRepository) {
         this.emprestimoRepository = emprestimoRepository;
+    }
+
+    public void setMembroService(MembroService membroService) {
         this.membroService = membroService;
+    }
+
+    public void setLivroService(LivroService livroService) {
         this.livroService = livroService;
     }
 
@@ -62,6 +69,21 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     @Override
     public EmprestimoModel saveEmprestimo(EmprestimoModel emprestimo) {
         return emprestimoRepository.save(emprestimo);
+    }
+
+    @Override
+    public List<EmprestimoModel> findEmprestimosByLivroId(Long idLivro) {
+        return emprestimoRepository.findByLivroId(idLivro);
+    }
+
+    @Override
+    public List<EmprestimoModel> findEmprestimosByMembroId(Long idMembro) {
+        return emprestimoRepository.findByMembroId(idMembro);
+    }
+
+    @Override
+    public void deleteAllEmprestimo(List<EmprestimoModel> emprestimos) {
+        emprestimoRepository.deleteAll(emprestimos);
     }
 
     private EmprestimoRecord mapToBibliotecarioRecord(EmprestimoModel emprestimo) {

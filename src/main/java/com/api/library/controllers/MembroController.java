@@ -3,6 +3,7 @@ package com.api.library.controllers;
 
 import com.api.library.dtos.MembroRecord;
 import com.api.library.models.MembroModel;
+import com.api.library.services.LibraryServiceFacade;
 import com.api.library.services.MembroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,9 @@ public class MembroController {
     private MembroService membroService;
 
     @Autowired
-    public MembroController(MembroService membroService) {
-        this.membroService = membroService;
+    public MembroController(LibraryServiceFacade libraryServiceFacade) {
+        this.membroService = libraryServiceFacade.membroService();
+        this.membroService.setEmprestimoService(libraryServiceFacade.emprestimoService());
     }
 
     @GetMapping
@@ -30,10 +32,15 @@ public class MembroController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MembroRecord> getAllMembros(@PathVariable Long id) {
+    public ResponseEntity<MembroRecord> getMembro(@PathVariable Long id) {
         MembroRecord membros;
         membros = membroService.findMembro(id);
         return new ResponseEntity<>(membros, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteMembros(@PathVariable Long id) {
+        return new ResponseEntity<>(membroService.deleteMembro(id), HttpStatus.OK);
     }
 
     @PostMapping

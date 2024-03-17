@@ -25,4 +25,8 @@ public interface BibliotecarioService {
     String realizarEmprestimo(Long idBibliotecario, EmprestimoBibliotecarioRecord emprestimoBibliotecarioRecord);
 
     Boolean deleteBibliotecario(Long id);
+
+    void setMembroService(MembroService membroService);
+    void setLivroService(LivroService livroService);
+    void setEmprestimoService(EmprestimoService emprestimoService);
 }

@@ -4,6 +4,7 @@ package com.api.library.controllers;
 import com.api.library.dtos.BibliotecarioRecord;
 import com.api.library.dtos.EmprestimoBibliotecarioRecord;
 import com.api.library.services.BibliotecarioService;
+import com.api.library.services.LibraryServiceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,11 @@ public class BibliotecarioController {
     private BibliotecarioService bibliotecarioService;
 
     @Autowired
-    public BibliotecarioController(BibliotecarioService bibliotecarioService) {
-        this.bibliotecarioService = bibliotecarioService;
+    public BibliotecarioController(LibraryServiceFacade libraryServiceFacade) {
+        this.bibliotecarioService = libraryServiceFacade.bibliotecarioService();
+        this.bibliotecarioService.setEmprestimoService(libraryServiceFacade.emprestimoService());
+        this.bibliotecarioService.setMembroService(libraryServiceFacade.membroService());
+        this.bibliotecarioService.setLivroService(libraryServiceFacade.livroService());
     }
 
 

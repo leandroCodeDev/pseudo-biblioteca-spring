@@ -5,10 +5,13 @@ import com.api.library.dtos.BibliotecarioRecord;
 import com.api.library.dtos.LivroRecord;
 import com.api.library.dtos.MembroRecord;
 import com.api.library.exception.ModelRepositoryNotFoundException;
+import com.api.library.models.EmprestimoModel;
 import com.api.library.models.LivroModel;
 import com.api.library.models.MembroModel;
 import com.api.library.repositories.MembroRepository;
 import com.api.library.services.BibliotecarioService;
+import com.api.library.services.EmprestimoService;
+import com.api.library.services.LibraryServiceFacade;
 import com.api.library.services.MembroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +24,17 @@ import java.util.Optional;
 public class MembroServiceImpl implements MembroService {
 
     private final MembroRepository membroRepository;
+    private EmprestimoService emprestimoService;
 
     @Autowired
     public MembroServiceImpl(MembroRepository membroRepository) {
         this.membroRepository = membroRepository;
+    }
+
+
+
+    public void setEmprestimoService(EmprestimoService emprestimoService) {
+        this.emprestimoService = emprestimoService;
     }
 
     @Override
@@ -55,8 +65,19 @@ public class MembroServiceImpl implements MembroService {
         return membroModel.toRecords();
     }
 
+    @Override
+    public Boolean deleteMembro(Long id){
+        List<EmprestimoModel> emprestimo = emprestimoService.findEmprestimosByMembroId(id);
+        emprestimoService.deleteAllEmprestimo(emprestimo);
+        membroRepository.deleteById(id);
+        return  !membroRepository.existsById(id);
+    }
+
+
 
     private MembroRecord mapToMembroRecord(MembroModel membro){
         return new MembroRecord(membro.getId(), membro.getNome(),membro.getTelefone(),membro.getEndereco());
     }
+
+
 }

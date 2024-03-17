@@ -3,39 +3,42 @@ package com.api.library.services.impl;
 
 import com.api.library.dtos.BibliotecarioRecord;
 import com.api.library.dtos.EmprestimoBibliotecarioRecord;
-import com.api.library.dtos.LivroRecord;
 import com.api.library.exception.ModelRepositoryNotFoundException;
 import com.api.library.models.BibliotecarioModel;
 import com.api.library.models.EmprestimoModel;
 import com.api.library.models.LivroModel;
 import com.api.library.models.MembroModel;
 import com.api.library.repositories.BibliotecarioRepository;
-import com.api.library.services.BibliotecarioService;
-import com.api.library.services.EmprestimoService;
-import com.api.library.services.LivroService;
-import com.api.library.services.MembroService;
+import com.api.library.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BibliotecarioServiceImpl implements BibliotecarioService {
 
-    private final BibliotecarioRepository bibliotecarioRepository;
-    private final MembroService membroService;
-    private final LivroService livroService;
-    private final EmprestimoService emprestimoService;
+    private  final BibliotecarioRepository bibliotecarioRepository;
+    private  MembroService membroService;
+    private  LivroService livroService;
+    private  EmprestimoService emprestimoService;
 
     @Autowired
-    public BibliotecarioServiceImpl(BibliotecarioRepository bibliotecarioRepository, MembroService membroService, LivroService livroService, EmprestimoService emprestimoService) {
+    public BibliotecarioServiceImpl(BibliotecarioRepository bibliotecarioRepository) {
         this.bibliotecarioRepository = bibliotecarioRepository;
+    }
+
+
+    public void setMembroService(MembroService membroService) {
         this.membroService = membroService;
+    }
+
+    public void setLivroService(LivroService livroService) {
         this.livroService = livroService;
+    }
+
+    public void setEmprestimoService(EmprestimoService emprestimoService) {
         this.emprestimoService = emprestimoService;
     }
 
