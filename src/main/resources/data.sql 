@@ -1,0 +1,63 @@
+INSERT INTO Livro (titulo, autor, anoPublicacao) VALUES
+('Dom Casmurro', 'Machado de Assis', 1899),
+('O Senhor dos Anéis', 'J.R.R. Tolkien', 1954),
+('1984', 'George Orwell', 1949),
+('Harry Potter e a Pedra Filosofal', 'J.K. Rowling', 1997),
+('A Revolução dos Bichos', 'George Orwell', 1945),
+('Cem Anos de Solidão', 'Gabriel García Márquez', 1967),
+('O Pequeno Príncipe', 'Antoine de Saint-Exupéry', 1943),
+('A Menina que Roubava Livros', 'Markus Zusak', 2005),
+('O Hobbit', 'J.R.R. Tolkien', 1937),
+('A Culpa é das Estrelas', 'John Green', 2012);
+
+INSERT INTO Membro (nome, endereco, telefone) VALUES
+('João Silva', 'Rua A, 123', '(11) 1234-5678'),
+('Maria Santos', 'Av. B, 456', '(22) 9876-5432'),
+('Pedro Oliveira', 'Rua C, 789', '(33) 2468-1357'),
+('Ana Costa', 'Av. D, 789', '(44) 8765-4321'),
+('Lucas Martins', 'Rua E, 321', NULL),
+('Laura Almeida', 'Av. F, 987', '(55) 1122-3344'),
+('Marcos Pereira', 'Rua G, 654', NULL),
+('Camila Rocha', 'Av. H, 321', '(66) 5544-3322'),
+('Mateus Carvalho', 'Rua I, 159', '(77) 6677-8899'),
+('Carolina Souza', 'Av. J, 753', '(88) 9988-7766');
+
+
+-- Suponha que os IDs de Livro e Membro estejam de acordo com os dados inseridos anteriormente
+INSERT INTO Emprestimo (id_livro, id_membro, dataEmprestimo, dataDevolucao) VALUES
+(1, 1, '2022-01-10', '2022-01-20'),
+(2, 2, '2022-02-15', '2022-03-05'),
+(3, 3, '2022-03-20', NULL),
+(4, 4, '2022-04-05', '2022-04-15'),
+(5, 5, '2022-05-12', '2022-05-22'),
+(6, 6, '2022-06-18', '2022-06-28'),
+(7, 7, '2022-07-25', '2022-08-05'),
+(8, 8, '2022-08-30', NULL),
+(9, 9, '2022-09-05', '2022-09-15'),
+(10, 10, '2022-10-10', NULL);
+
+
+INSERT INTO Bibliotecario (nome, email, senha) VALUES
+('Fernanda Oliveira', 'fernanda@example.com', 'senha123'),
+('Rafael Santos', 'rafael@example.com', 'abc123'),
+('Juliana Lima', 'juliana@example.com', 'xyz456'),
+('Rodrigo Pereira', 'rodrigo@example.com', 'senha789'),
+('Mariana Costa', 'mariana@example.com', 'abcdef'),
+('Lucas Silva', 'lucas@example.com', '123456'),
+('Gabriela Souza', 'gabriela@example.com', 'senhaXYZ'),
+('Bruno Almeida', 'bruno@example.com', '789xyz'),
+('Ana Rodrigues', 'ana@example.com', 'senhaABC'),
+('Pedro Martins', 'pedro@example.com', 'senhaDEF');
+
+
+INSERT INTO Visitante (nome, telefone) VALUES
+('Felipe Oliveira', '(99) 1234-5678'),
+('Carla Santos', NULL),
+('Gustavo Lima', '(88) 9876-5432'),
+('Amanda Pereira', NULL),
+('Tiago Costa', '(77) 2468-1357'),
+('Larissa Silva', NULL),
+('André Souza', '(66) 8765-4321'),
+('Julia Rodrigues', NULL),
+('Diego Almeida', '(55) 1122-3344'),
+('Isabela Martins', NULL);
