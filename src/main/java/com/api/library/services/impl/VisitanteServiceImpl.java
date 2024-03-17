@@ -49,6 +49,12 @@ public class VisitanteServiceImpl implements VisitanteService {
         return visitanteModel.toRecords();
     }
 
+    @Override
+    public Boolean deleteVisitante(Long id){
+        visitanteRepository.deleteById(id);
+        return !visitanteRepository.existsById(id);
+    }
+
     private VisitanteRecord mapVisitanteToRecord(VisitanteModel visitanteModel) {
         return  new VisitanteRecord(visitanteModel.getId(), visitanteModel.getNome(), visitanteModel.getTelefone());
     }

@@ -16,4 +16,5 @@ public interface VisitanteService {
 
 
     VisitanteRecord saveVisitante(VisitanteRecord Visitante);
+    Boolean deleteVisitante(Long id);
 }

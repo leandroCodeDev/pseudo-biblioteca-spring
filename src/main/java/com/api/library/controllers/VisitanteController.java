@@ -37,6 +37,11 @@ public class VisitanteController {
         return new ResponseEntity<>(visitante, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteVisitante(@PathVariable Long id) {
+        return new ResponseEntity<>(visitanteService.deleteVisitante(id), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<VisitanteRecord> saveVisitante(@RequestBody VisitanteRecord visitante) {
         VisitanteRecord savedVisitante;
